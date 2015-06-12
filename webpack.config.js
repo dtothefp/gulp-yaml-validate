@@ -23,7 +23,7 @@ var loaders = [
 
 var plugins = [
   new webpack.BannerPlugin(
-    'require("source-map-support").install();',
+    'try{require("source-map-support").install();}\ncatch(err) {}',
     { raw: true, entryOnly: false }
   )
 ];

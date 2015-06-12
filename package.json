@@ -1,6 +1,6 @@
 {
   "name": "gulp-yaml-validate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Gulp plugin for validating yaml files",
   "main": "index.js",
   "scripts": {
