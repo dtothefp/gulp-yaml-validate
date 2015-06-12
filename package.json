@@ -39,7 +39,6 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "private": true,
   "dependencies": {
     "bufferstreams": "^1.0.1",
     "check-type": "^0.4.11",
