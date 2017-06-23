@@ -55,7 +55,7 @@ Default: `null`
 
 Further transform the resulting output. It has the same usage as for [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
-#### options.safe
+#### options.html
 
 Type: `Boolean`
 
