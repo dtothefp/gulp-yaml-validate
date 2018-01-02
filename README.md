@@ -1,4 +1,4 @@
-#[gulp](https://github.com/gulpjs/gulp)-yaml-validate
+# [gulp](https://github.com/gulpjs/gulp)-yaml-validate
 
 ## Install
 
