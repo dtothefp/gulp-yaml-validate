@@ -2,7 +2,7 @@
 
 import 'should';
 import yaml from'../';
-import gutil, {File} from 'gulp-util';
+import {File} from 'vinyl';
 import es from 'event-stream';
 import fs from 'fs';
 import path from 'path';
@@ -141,7 +141,7 @@ describe('gulp-yaml-validate', () => {
     describe('in stream mode', () => {
 
         beforeEach(() => {
-            emptyFile = new gutil.File({
+            emptyFile = new File({
                 path: 'test/empty.yml',
                 cwd: 'test',
                 contents: fs.createReadStream('test/empty.yml')

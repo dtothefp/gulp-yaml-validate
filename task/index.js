@@ -2,7 +2,9 @@
 
 import through from 'through2';
 import path from 'path';
-import gutil, {PluginError} from 'gulp-util'
+// import gutil, {PluginError} from 'gulp-util'
+import {PluginError} from 'plugin-error'
+import {replaceExtension} from 'replace-ext'
 import jsyaml from 'js-yaml';
 import extend  from 'extend';
 import BufferStreams from 'bufferstreams';
@@ -41,7 +43,7 @@ module.exports = function(options) {
       }
       try {
         file.contents = yaml2json(file.contents, options);
-        file.path = gutil.replaceExtension(file.path, '.json');
+        file.path = replaceExtension(file.path, '.json');
       }
       catch (error) {
         let msg = `${error.message} => ${file.path}`;
@@ -63,7 +65,7 @@ module.exports = function(options) {
           }
           else {
             try {
-              file.path = gutil.replaceExtension(file.path, '.json');
+              file.path = replaceExtension(file.path, '.json');
               cb(null, yaml2json(buf, options));
             }
             catch (error) {

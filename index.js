@@ -45,39 +45,41 @@ module.exports =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _interopRequireDefault = __webpack_require__(2)['default'];
+	var _interopRequireDefault = __webpack_require__(1)['default'];
 	
-	var _through2 = __webpack_require__(3);
+	var _through2 = __webpack_require__(2);
 	
 	var _through22 = _interopRequireDefault(_through2);
 	
-	var _path = __webpack_require__(4);
+	var _path = __webpack_require__(3);
 	
 	var _path2 = _interopRequireDefault(_path);
 	
-	var _gulpUtil = __webpack_require__(5);
+	// import gutil, {PluginError} from 'gulp-util'
 	
-	var _gulpUtil2 = _interopRequireDefault(_gulpUtil);
+	var _pluginError = __webpack_require__(4);
 	
-	var _jsYaml = __webpack_require__(1);
+	var _replaceExt = __webpack_require__(5);
+	
+	var _jsYaml = __webpack_require__(6);
 	
 	var _jsYaml2 = _interopRequireDefault(_jsYaml);
 	
-	var _extend = __webpack_require__(6);
+	var _extend = __webpack_require__(7);
 	
 	var _extend2 = _interopRequireDefault(_extend);
 	
-	var _bufferstreams = __webpack_require__(7);
+	var _bufferstreams = __webpack_require__(8);
 	
 	var _bufferstreams2 = _interopRequireDefault(_bufferstreams);
 	
 	var _jsYaml3 = _interopRequireDefault(_jsYaml);
 	
-	var _checkType = __webpack_require__(8);
+	var _checkType = __webpack_require__(9);
 	
 	var PLUGIN_NAME = 'gulp-yaml-validate';
 	
@@ -107,34 +109,34 @@ module.exports =
 	    if (file.isBuffer()) {
 	      if (file.contents.length === 0) {
 	        var msg = 'File ' + _path2['default'].dirname(file.path) + ' is empty';
-	        this.emit('error', new _gulpUtil.PluginError(PLUGIN_NAME, msg));
+	        this.emit('error', new _pluginError.PluginError(PLUGIN_NAME, msg));
 	        return cb();
 	      }
 	      try {
 	        file.contents = yaml2json(file.contents, options);
-	        file.path = _gulpUtil2['default'].replaceExtension(file.path, '.json');
+	        file.path = (0, _replaceExt.replaceExtension)(file.path, '.json');
 	      } catch (error) {
-	        var msg = '' + error.message + ' => ' + file.path;
-	        this.emit('error', new _gulpUtil.PluginError(PLUGIN_NAME, msg));
+	        var msg = error.message + ' => ' + file.path;
+	        this.emit('error', new _pluginError.PluginError(PLUGIN_NAME, msg));
 	        return cb();
 	      }
 	    } else if (file.isStream()) {
 	      file.contents = file.contents.pipe(new _bufferstreams2['default'](function (err, buf, cb) {
 	        if (err) {
-	          self.emit('error', new _gulpUtil.PluginError(PLUGIN_NAME, err.message));
+	          self.emit('error', new _pluginError.PluginError(PLUGIN_NAME, err.message));
 	        } else {
 	          if (buf.length === 0) {
 	            var msg = 'File ' + _path2['default'].dirname(file.path) + ' is empty';
-	            var error = new _gulpUtil.PluginError(PLUGIN_NAME, msg);
+	            var error = new _pluginError.PluginError(PLUGIN_NAME, msg);
 	            self.emit('error', error);
 	            cb(error);
 	          } else {
 	            try {
-	              file.path = _gulpUtil2['default'].replaceExtension(file.path, '.json');
+	              file.path = (0, _replaceExt.replaceExtension)(file.path, '.json');
 	              cb(null, yaml2json(buf, options));
 	            } catch (error) {
-	              var msg = '' + error.message + ' => ' + file.path;
-	              self.emit('error', new _gulpUtil.PluginError(PLUGIN_NAME, msg));
+	              var msg = error.message + ' => ' + file.path;
+	              self.emit('error', new _pluginError.PluginError(PLUGIN_NAME, msg));
 	              cb(error);
 	            }
 	          }
@@ -146,15 +148,9 @@ module.exports =
 	  });
 	};
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = require("js-yaml");
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	
@@ -166,42 +162,54 @@ module.exports =
 	
 	exports.__esModule = true;
 
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
 
 	module.exports = require("through2");
 
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
 
 	module.exports = require("path");
 
-/***/ },
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+	module.exports = require("plugin-error");
+
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-	module.exports = require("gulp-util");
+	module.exports = require("replace-ext");
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
+
+	module.exports = require("js-yaml");
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
 
 	module.exports = require("extend");
 
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
 
 	module.exports = require("bufferstreams");
 
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
 
 	module.exports = require("check-type");
 
-/***/ }
+/***/ })
 /******/ ]);
 //# sourceMappingURL=index.js.map
